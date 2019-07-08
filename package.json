@@ -1,5 +1,5 @@
 {
-  "name": "boilermaker",
+  "name": "flightBookingAmadeus",
   "version": "1.0.0",
   "description": "Some boilerplate code to get you started - get shakin'!",
   "engines": {
@@ -13,27 +13,20 @@
     "lint": "eslint ./ --ignore-path .gitignore",
     "prepush": "npm run lint && npm test",
     "postinstall": "touch secrets.js",
-    "seed": "node script/seed.js",
     "start": "node server",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & npm run start-server",
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
     "test": "NODE_ENV='test' mocha ./server/**/*.spec.js ./server/**/**/*.spec.js ./client/**/*.spec.js --require @babel/polyfill --require @babel/register"
   },
-  "author": "Fullstack Academy of Code",
+  "author": "Yacine Benzerga",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.15.3",
     "body-parser": "^1.16.1",
     "compression": "^1.7.1",
-    "connect-session-sequelize": "^4.1.0",
     "express": "^4.14.1",
-    "express-session": "^1.15.1",
     "history": "^4.6.3",
     "morgan": "^1.8.1",
-    "passport": "^0.3.2",
-    "passport-google-oauth": "^1.0.0",
-    "pg": "^6.1.2",
-    "pg-hstore": "^2.3.2",
     "prop-types": "^15.5.8",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
@@ -42,7 +35,6 @@
     "redux": "^3.6.0",
     "redux-logger": "^2.8.1",
     "redux-thunk": "^2.2.0",
-    "sequelize": "^4.3.1",
     "socket.io": "^2.0.3"
   },
   "devDependencies": {
