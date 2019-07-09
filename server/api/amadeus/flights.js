@@ -26,7 +26,7 @@ router.get(
         period: req.params.date
       }
     );
-    res.json(maxLocTrav.data);
+    res.json(mostTravDest.data);
   })
 );
 
