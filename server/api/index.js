@@ -1,9 +1,13 @@
 const router = require('express').Router();
 module.exports = router;
 
-//put amadeus router here
-/* router.use('/amadeus', require('./amadeus')) */
+//FlightRoutes
+router.use('/searchFlights', require('./amadeus/flights'));
 
+//HotelRoutes
+router.use('/searchHotels', require('./amadeus/hotels'));
+
+//Error Handling
 router.use((req, res, next) => {
   const error = new Error('Not Found');
   error.status = 404;
