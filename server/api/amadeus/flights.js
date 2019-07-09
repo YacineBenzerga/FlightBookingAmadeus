@@ -16,8 +16,9 @@ router.get(
   })
 );
 
+//Search most traveled destinations from origin on date
 router.get(
-  '/most-traveled/:from-:date',
+  '/frqTraveled/:from-:date',
   defaultHandler(async (req, res, next) => {
     const mostTravDest = await amadeus.travel.analytics.AirTraffic.Traveled.get(
       {
@@ -25,7 +26,7 @@ router.get(
         period: req.params.date
       }
     );
-    res.json(maxLocTrav.data);
+    res.json(mostTravDest.data);
   })
 );
 
