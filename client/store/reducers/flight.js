@@ -1,4 +1,4 @@
-import axios from 'axios';
+/* import axios from 'axios';
 
 const GOT_DEP_FLIGHTS = 'GOT_DEP_FLIGHTS';
 const GOT_RET_FLIGHTS = 'GOT_RET_FLIGHTS';
@@ -72,3 +72,4 @@ const flightReducer = (state = initialState, action) => {
 };
 
 export default flightReducer;
+ */
