@@ -32,7 +32,7 @@ ul.topnav {
   top: 0;
 }
 
-li {
+.navbarLi {
   float: left;
   border-right: 1px solid #bbb;
 }
@@ -69,4 +69,25 @@ li a:hover {
   position: relative;
   top: 18px;
   left: 10px;
+}
+
+.flightResults {
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-around;
+}
+
+ol {
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+
+ol li {
+  display: flex;
+  flex-wrap: wrap;
 }
