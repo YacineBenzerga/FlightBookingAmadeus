@@ -5,6 +5,7 @@ import moment from 'moment';
 import 'react-daterange-picker/dist/css/react-calendar.css';
 import { getDepFlights, getRetFlights } from '../../store/reducers/flight';
 import { connect } from 'react-redux';
+import FlightResults from './flightResults';
 
 class FlightFilter extends React.Component {
   constructor(props) {
@@ -140,6 +141,7 @@ class FlightFilter extends React.Component {
           )}
           <button onClick={this.SearchDepFlights}>Find Flights</button>
         </form>
+        <FlightResults />
       </div>
     );
   }
