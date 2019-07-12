@@ -1,12 +1,14 @@
 import React from 'react';
-import { USstates } from '../../utils';
+import { majCities, UScities } from '../../utils';
 import DateRangePicker from 'react-daterange-picker';
 import moment from 'moment';
 import 'react-daterange-picker/dist/css/react-calendar.css';
+import { getDepFlights, getRetFlights } from '../../store/reducers/flight';
+import { connect } from 'react-redux';
 
 class FlightFilter extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     const today = moment();
 
     this.state = {
@@ -17,6 +19,7 @@ class FlightFilter extends React.Component {
       value: moment.range(today.clone(), today.clone().add(7, 'days')),
       isOpen: false
     };
+    this.SearchDepFlights = this.SearchDepFlights.bind(this);
   }
 
   onToggle = () => {
@@ -42,7 +45,13 @@ class FlightFilter extends React.Component {
   };
 
   onSelect = (value, states) => {
-    this.setState({ value, states });
+    this.setState({
+      value,
+      Departing: moment(value.start).format('YYYY-MM-DD'),
+      Returning: moment(value.end).format('YYYY-MM-DD'),
+      states
+    });
+    console.log(this.state);
   };
 
   renderSelectionValue = () => {
@@ -56,18 +65,41 @@ class FlightFilter extends React.Component {
     );
   };
 
+  async SearchDepFlights(evt) {
+    evt.preventDefault();
+    let { Departing, Returning, OriginLoc, DestinLoc } = this.state;
+    var depFl = await this.props.searchDepFlights(
+      UScities[OriginLoc],
+      UScities[DestinLoc],
+      Departing
+      /* OriginLoc,
+      DestinLoc,
+      Departing */
+    );
+    /*  var retFl = await this.props.searchRetFlights(
+      DestinLoc,
+      OriginLoc,
+      Returning
+    ); */
+    this.setState({
+      DepFlights: this.props.depFlights
+      /* RetFlights: this.props.retFlights */
+    });
+  }
+
   render() {
-    console.log(this.state);
+    console.log(UScities['Chicago']);
     return (
       <div>
-        <form>
+        <form onSubmit={this.SearchDepFlights}>
           <label>From?</label>
           <select
             name="OriginLoc"
             onChange={this.handleChange}
             value={this.state.OriginLoc}
           >
-            {USstates.map(stt => {
+            <option>--</option>
+            {majCities.map(stt => {
               return (
                 <option key={stt} value={stt}>
                   {stt}
@@ -81,7 +113,8 @@ class FlightFilter extends React.Component {
             onChange={this.handleChange}
             value={this.state.DestinLoc}
           >
-            {USstates.map(stt => {
+            <option>--</option>
+            {majCities.map(stt => {
               return (
                 <option key={stt} value={stt}>
                   {stt}
@@ -105,10 +138,24 @@ class FlightFilter extends React.Component {
               singleDateRange={true}
             />
           )}
+          <button onClick={this.SearchDepFlights}>Find Flights</button>
         </form>
       </div>
     );
   }
 }
 
-export default FlightFilter;
+const mapDispatchToProps = dispatch => ({
+  searchDepFlights: (from, to, date) => dispatch(getDepFlights(from, to, date)),
+  searchRetFlights: (from, to, date) => dispatch(getRetFlights(from, to, date))
+});
+
+const mapStateToProps = state => ({
+  depFlights: state.flight.depFlights,
+  retFlights: state.flight.retFlights
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FlightFilter);

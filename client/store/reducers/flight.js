@@ -1,4 +1,4 @@
-/* import axios from 'axios';
+import axios from 'axios';
 
 const GOT_DEP_FLIGHTS = 'GOT_DEP_FLIGHTS';
 const GOT_RET_FLIGHTS = 'GOT_RET_FLIGHTS';
@@ -30,21 +30,29 @@ export const filteredFlights = flights => ({
   flights
 });
 
-const searchTypeFlights = (typeFlight, from, to, date) => async dispatch => {
+export const getDepFlights = (from, to, date) => async dispatch => {
   dispatch(fetchingFlights());
   try {
     const { data } = await axios.get(
       `/api/searchFlights/${from}-${to}-${date}`
     );
-    dispatch(typeFlight(data));
+    dispatch(gotDepFlights(data));
   } catch (error) {
     console.error(error);
   }
 };
 
-//DRY
-export const getDepFlights = searchTypeFlights(gotDepFlights, from, to, date);
-export const getRetFlights = searchTypeFlights(gotRetFlights, from, to, date);
+export const getRetFlights = (from, to, date) => async dispatch => {
+  dispatch(fetchingFlights());
+  try {
+    const { data } = await axios.get(
+      `/api/searchFlights/${from}-${to}-${date}`
+    );
+    dispatch(gotRetFlights(data));
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 const initialState = {
   isFetching: false,
@@ -72,4 +80,3 @@ const flightReducer = (state = initialState, action) => {
 };
 
 export default flightReducer;
- */
