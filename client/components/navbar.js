@@ -13,13 +13,13 @@ const Navbar = () => (
         </div>
         <nav>
           <ul className="topnav">
-            <li>
+            <li className="navbarLi">
               <img src="https://img.icons8.com/nolan/64/000000/airport.png" />
             </li>
-            <li>
+            <li className="navbarLi">
               <a href="/flights">Flights</a>
             </li>
-            <li>
+            <li className="navbarLi">
               <a href="/hotels">Hotels</a>
             </li>
           </ul>
