@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectedFlight } from '../../store/reducers/flight';
 
 const FlightView = props => {
   const flt = props.flt.offerItems[0];
@@ -24,8 +23,6 @@ const FlightView = props => {
     currency: 'USD'
   }).format(ttPrice);
 
-  console.log(departLoc, arrivLoc);
-
   return (
     <div key={flt.id} className="flightResults">
       <ol>
@@ -43,16 +40,12 @@ const FlightView = props => {
           </ol>
         </li>
       </ol>
-      <button>Select</button>
+      <button onClick={this.props.handleSelect}>Select</button>
     </div>
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  selectFlight: flight => dispatch(selectedFlight(flight))
-});
-
 export default connect(
   null,
-  mapDispatchToProps
+  null
 )(FlightView);
