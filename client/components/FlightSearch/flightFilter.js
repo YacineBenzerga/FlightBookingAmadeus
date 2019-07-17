@@ -52,7 +52,6 @@ class FlightFilter extends React.Component {
       Returning: moment(value.end).format('YYYY-MM-DD'),
       states
     });
-    console.log(this.state);
   };
 
   renderSelectionValue = () => {
