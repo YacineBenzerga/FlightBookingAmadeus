@@ -40,7 +40,7 @@ const FlightView = props => {
           </ol>
         </li>
       </ol>
-      <button onClick={this.props.handleSelect}>Select</button>
+      <button onClick={props.handleSelect}>Select</button>
     </div>
   );
 };

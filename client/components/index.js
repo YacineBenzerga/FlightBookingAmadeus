@@ -5,3 +5,4 @@
  */
 export { default as Navbar } from './navbar';
 export { default as FlightFilter } from './FlightSearch/flightFilter';
+export { default as HotelSearch } from './HotelSearch/hotelFilter';

@@ -74,7 +74,7 @@ class FlightFilter extends React.Component {
       UScities[DestinLoc],
       Departing
     );
-    var retFl = await this.props.searchDepFlights(
+    var retFl = await this.props.searchRetFlights(
       UScities[DestinLoc],
       UScities[OriginLoc],
       Returning
