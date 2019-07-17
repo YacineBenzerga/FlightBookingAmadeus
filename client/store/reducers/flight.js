@@ -2,7 +2,8 @@ import axios from 'axios';
 
 const GOT_DEP_FLIGHTS = 'GOT_DEP_FLIGHTS';
 const GOT_RET_FLIGHTS = 'GOT_RET_FLIGHTS';
-const SELECTED_FLIGHT = 'SELECTED_FLIGHT';
+const SELECTED_DEP_FLIGHT = 'SELECTED_DEP_FLIGHT';
+const SELECTED_RET_FLIGHT = 'SELECTED_RET_FLIGHT';
 const FETCHING_FLIGHTS = 'FETCHING_FLIGHTS';
 const FILTEREDFLIGHTS = 'FILTEREDFLIGHTS';
 
@@ -16,8 +17,13 @@ const gotRetFlights = flights => ({
   flights
 });
 
-export const selectedFlight = flight => ({
-  type: SELECTED_FLIGHT,
+export const selectedDepFlight = flight => ({
+  type: SELECTED_DEP_FLIGHT,
+  flight
+});
+
+export const selectedRetFlight = flight => ({
+  type: SELECTED_RET_FLIGHT,
   flight
 });
 
@@ -59,7 +65,8 @@ const initialState = {
   depFlights: [],
   retFlights: [],
   filteredFlights: [],
-  flight: {}
+  sDepFlight: {},
+  sRetFlight: {}
 };
 
 const flightReducer = (state = initialState, action) => {
@@ -70,8 +77,10 @@ const flightReducer = (state = initialState, action) => {
       return { ...state, retFlights: action.flights, isFetching: false };
     case FETCHING_FLIGHTS:
       return { ...state, isFetching: true };
-    case SELECTED_FLIGHT:
-      return { ...state, flight: action.flight };
+    case SELECTED_DEP_FLIGHT:
+      return { ...state, sDepFlight: action.sDepFlight };
+    case SELECTED_RET_FLIGHT:
+      return { ...state, sRetFlight: action.sRetFlight };
     case FILTEREDFLIGHTS:
       return { ...state, filteredFlights: action.flights };
     default:

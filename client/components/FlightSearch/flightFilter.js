@@ -20,7 +20,7 @@ class FlightFilter extends React.Component {
       value: moment.range(today.clone(), today.clone().add(7, 'days')),
       isOpen: false
     };
-    this.SearchDepFlights = this.SearchDepFlights.bind(this);
+    this.SearchFlights = this.SearchFlights.bind(this);
   }
 
   onToggle = () => {
@@ -66,33 +66,29 @@ class FlightFilter extends React.Component {
     );
   };
 
-  async SearchDepFlights(evt) {
+  async SearchFlights(evt) {
     evt.preventDefault();
-    let { Departing, Returning, OriginLoc, DestinLoc } = this.state;
+    let { Returning, Departing, OriginLoc, DestinLoc } = this.state;
     var depFl = await this.props.searchDepFlights(
       UScities[OriginLoc],
       UScities[DestinLoc],
       Departing
-      /* OriginLoc,
-      DestinLoc,
-      Departing */
     );
-    /*  var retFl = await this.props.searchRetFlights(
-      DestinLoc,
-      OriginLoc,
+    var retFl = await this.props.searchRetFlights(
+      UScities[DestinLoc],
+      UScities[OriginLoc],
       Returning
-    ); */
+    );
     this.setState({
-      DepFlights: this.props.depFlights
-      /* RetFlights: this.props.retFlights */
+      DepFlights: this.props.depFlights,
+      RetFlights: this.props.retFlights
     });
   }
 
   render() {
-    console.log(UScities['Chicago']);
     return (
       <div>
-        <form onSubmit={this.SearchDepFlights}>
+        <form onSubmit={this.SearchFlights}>
           <label>From?</label>
           <select
             name="OriginLoc"
@@ -139,7 +135,7 @@ class FlightFilter extends React.Component {
               singleDateRange={true}
             />
           )}
-          <button onClick={this.SearchDepFlights}>Find Flights</button>
+          <button onClick={this.SearchFlights}>Find Flights</button>
         </form>
         <FlightResults />
       </div>
@@ -152,12 +148,7 @@ const mapDispatchToProps = dispatch => ({
   searchRetFlights: (from, to, date) => dispatch(getRetFlights(from, to, date))
 });
 
-const mapStateToProps = state => ({
-  depFlights: state.flight.depFlights,
-  retFlights: state.flight.retFlights
-});
-
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(FlightFilter);
