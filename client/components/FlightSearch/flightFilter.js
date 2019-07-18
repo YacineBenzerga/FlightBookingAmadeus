@@ -3,9 +3,14 @@ import { majCities, UScities } from '../../utils';
 import DateRangePicker from 'react-daterange-picker';
 import moment from 'moment';
 import 'react-daterange-picker/dist/css/react-calendar.css';
-import { getDepFlights, getRetFlights } from '../../store/reducers/flight';
+import {
+  getDepFlights,
+  getRetFlights,
+  resetAllFlights
+} from '../../store/reducers/flight';
 import { connect } from 'react-redux';
 import FlightResults from './flightResults';
+import FlightBook from './flightBook';
 
 class FlightFilter extends React.Component {
   constructor(props) {
@@ -18,7 +23,9 @@ class FlightFilter extends React.Component {
       OriginLoc: '',
       DestinLoc: '',
       value: moment.range(today.clone(), today.clone().add(7, 'days')),
-      isOpen: false
+      isOpen: false,
+      ns: 0,
+      flRec: []
     };
     this.SearchFlights = this.SearchFlights.bind(this);
   }
@@ -65,6 +72,17 @@ class FlightFilter extends React.Component {
     );
   };
 
+  handleReset = () => {
+    this.props.resetFlights();
+    this.setState({
+      Departing: '',
+      Returning: '',
+      OriginLoc: '',
+      DestinLoc: '',
+      value: moment.range(today.clone(), today.clone().add(7, 'days'))
+    });
+  };
+
   async SearchFlights(evt) {
     evt.preventDefault();
     let { Returning, Departing, OriginLoc, DestinLoc } = this.state;
@@ -78,65 +96,81 @@ class FlightFilter extends React.Component {
       UScities[OriginLoc],
       Returning
     );
-    this.setState({
-      DepFlights: this.props.depFlights,
-      RetFlights: this.props.retFlights
-    });
   }
+
+  handleGetNs = x => {
+    this.setState({
+      ns: this.state.ns + 1,
+      flRec: [...this.state.flRec, x]
+    });
+  };
 
   render() {
     return (
       <div>
-        <form onSubmit={this.SearchFlights}>
-          <label>From?</label>
-          <select
-            name="OriginLoc"
-            onChange={this.handleChange}
-            value={this.state.OriginLoc}
-          >
-            <option>--</option>
-            {majCities.map(stt => {
-              return (
-                <option key={stt} value={stt}>
-                  {stt}
-                </option>
-              );
-            })}
-          </select>
-          <label>To?</label>
-          <select
-            name="DestinLoc"
-            onChange={this.handleChange}
-            value={this.state.DestinLoc}
-          >
-            <option>--</option>
-            {majCities.map(stt => {
-              return (
-                <option key={stt} value={stt}>
-                  {stt}
-                </option>
-              );
-            })}
-          </select>
+        {this.state.ns === 2 ? (
           <div>
-            <input
-              type="button"
-              value="Toggle date picker"
-              onClick={this.onToggle}
-            />
+            <FlightBook flRec={this.state.flRec} />
           </div>
+        ) : (
+          <div>
+            <form onSubmit={this.SearchFlights}>
+              <label>From?</label>
+              <select
+                name="OriginLoc"
+                onChange={this.handleChange}
+                value={this.state.OriginLoc}
+              >
+                <option>--</option>
+                {majCities.map(stt => {
+                  return (
+                    <option key={stt} value={stt}>
+                      {stt}
+                    </option>
+                  );
+                })}
+              </select>
+              <label>To?</label>
+              <select
+                name="DestinLoc"
+                onChange={this.handleChange}
+                value={this.state.DestinLoc}
+              >
+                <option>--</option>
+                {majCities.map(stt => {
+                  return (
+                    <option key={stt} value={stt}>
+                      {stt}
+                    </option>
+                  );
+                })}
+              </select>
+              <div>
+                <input
+                  type="button"
+                  value="Toggle date picker"
+                  onClick={this.onToggle}
+                />
+              </div>
 
-          <div>{this.renderSelectionValue()}</div>
-          {this.state.isOpen && (
-            <DateRangePicker
-              value={this.state.value}
-              onSelect={this.onSelect}
-              singleDateRange={true}
-            />
-          )}
-          <button onClick={this.SearchFlights}>Find Flights</button>
-        </form>
-        <FlightResults />
+              <div>{this.renderSelectionValue()}</div>
+              {this.state.isOpen && (
+                <DateRangePicker
+                  value={this.state.value}
+                  onSelect={this.onSelect}
+                  singleDateRange={true}
+                />
+              )}
+              <button type="submit" onClick={this.SearchFlights}>
+                Find Flights
+              </button>
+              <button type="reset" onClick={this.handleReset}>
+                Reset
+              </button>
+            </form>
+            <FlightResults handleGetNs={this.handleGetNs} />
+          </div>
+        )}
       </div>
     );
   }
@@ -144,7 +178,8 @@ class FlightFilter extends React.Component {
 
 const mapDispatchToProps = dispatch => ({
   searchDepFlights: (from, to, date) => dispatch(getDepFlights(from, to, date)),
-  searchRetFlights: (from, to, date) => dispatch(getRetFlights(from, to, date))
+  searchRetFlights: (from, to, date) => dispatch(getRetFlights(from, to, date)),
+  resetFlights: () => dispatch(resetAllFlights())
 });
 
 export default connect(

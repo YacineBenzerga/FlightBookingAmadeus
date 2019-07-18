@@ -34,9 +34,9 @@ class FlightResults extends React.Component {
   handleSelect = evt => {
     const dedFl = JSON.parse(evt.target.id);
     this.setState({
-      ns: this.state.ns + 1,
-      flRec: [...this.state.flRec, dedFl]
+      ns: this.state.ns + 1
     });
+    this.props.handleGetNs(dedFl);
   };
 
   rendW = () => {
@@ -53,16 +53,10 @@ class FlightResults extends React.Component {
   };
 
   render() {
-    console.log('main props here', this.props);
     const allFlights = this.state.displFlights.slice(0, 10);
     const priceSorted = _.sortBy(allFlights, [
       x => Number(x.offerItems[0].price.total)
     ]);
-
-    if (this.state.flRec.length === 2) {
-      this.props.selectDepF(this.state.flRec[0]);
-      this.props.selectRetF(this.state.flRec[1]);
-    }
 
     return (
       <div>
@@ -83,9 +77,7 @@ class FlightResults extends React.Component {
 }
 const mapStateToProps = state => ({
   depFlights: state.flight.depFlights,
-  retFlights: state.flight.retFlights,
-  sDepFlight: state.flight.sDepFlight,
-  sRetFlight: state.flight.sRetFlight
+  retFlights: state.flight.retFlights
 });
 
 const mapDispatchToProps = dispatch => ({
