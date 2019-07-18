@@ -10,6 +10,7 @@ import {
 } from '../../store/reducers/flight';
 import { connect } from 'react-redux';
 import FlightResults from './flightResults';
+import FlightBook from './flightBook';
 
 class FlightFilter extends React.Component {
   constructor(props) {
@@ -22,9 +23,9 @@ class FlightFilter extends React.Component {
       OriginLoc: '',
       DestinLoc: '',
       value: moment.range(today.clone(), today.clone().add(7, 'days')),
-      isOpen: false
-      /* DepFlights: [],
-      RetFlights: [] */
+      isOpen: false,
+      ns: 0,
+      flRec: []
     };
     this.SearchFlights = this.SearchFlights.bind(this);
   }
@@ -97,64 +98,79 @@ class FlightFilter extends React.Component {
     );
   }
 
+  handleGetNs = x => {
+    this.setState({
+      ns: this.state.ns + 1,
+      flRec: [...this.state.flRec, x]
+    });
+  };
+
   render() {
     return (
       <div>
-        <form onSubmit={this.SearchFlights}>
-          <label>From?</label>
-          <select
-            name="OriginLoc"
-            onChange={this.handleChange}
-            value={this.state.OriginLoc}
-          >
-            <option>--</option>
-            {majCities.map(stt => {
-              return (
-                <option key={stt} value={stt}>
-                  {stt}
-                </option>
-              );
-            })}
-          </select>
-          <label>To?</label>
-          <select
-            name="DestinLoc"
-            onChange={this.handleChange}
-            value={this.state.DestinLoc}
-          >
-            <option>--</option>
-            {majCities.map(stt => {
-              return (
-                <option key={stt} value={stt}>
-                  {stt}
-                </option>
-              );
-            })}
-          </select>
+        {this.state.ns === 2 ? (
           <div>
-            <input
-              type="button"
-              value="Toggle date picker"
-              onClick={this.onToggle}
-            />
+            <FlightBook flRec={this.state.flRec} />
           </div>
+        ) : (
+          <div>
+            <form onSubmit={this.SearchFlights}>
+              <label>From?</label>
+              <select
+                name="OriginLoc"
+                onChange={this.handleChange}
+                value={this.state.OriginLoc}
+              >
+                <option>--</option>
+                {majCities.map(stt => {
+                  return (
+                    <option key={stt} value={stt}>
+                      {stt}
+                    </option>
+                  );
+                })}
+              </select>
+              <label>To?</label>
+              <select
+                name="DestinLoc"
+                onChange={this.handleChange}
+                value={this.state.DestinLoc}
+              >
+                <option>--</option>
+                {majCities.map(stt => {
+                  return (
+                    <option key={stt} value={stt}>
+                      {stt}
+                    </option>
+                  );
+                })}
+              </select>
+              <div>
+                <input
+                  type="button"
+                  value="Toggle date picker"
+                  onClick={this.onToggle}
+                />
+              </div>
 
-          <div>{this.renderSelectionValue()}</div>
-          {this.state.isOpen && (
-            <DateRangePicker
-              value={this.state.value}
-              onSelect={this.onSelect}
-              singleDateRange={true}
-            />
-          )}
-          <button type="submit" onClick={this.SearchFlights}>
-            Find Flights
-          </button>
-          <button type="reset" onClick={this.handleReset}>
-            Reset
-          </button>
-        </form>
-        <FlightResults resDisplFl={this.resDisplFl} />
+              <div>{this.renderSelectionValue()}</div>
+              {this.state.isOpen && (
+                <DateRangePicker
+                  value={this.state.value}
+                  onSelect={this.onSelect}
+                  singleDateRange={true}
+                />
+              )}
+              <button type="submit" onClick={this.SearchFlights}>
+                Find Flights
+              </button>
+              <button type="reset" onClick={this.handleReset}>
+                Reset
+              </button>
+            </form>
+            <FlightResults handleGetNs={this.handleGetNs} />
+          </div>
+        )}
       </div>
     );
   }

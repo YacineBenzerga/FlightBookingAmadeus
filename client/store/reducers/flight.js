@@ -7,6 +7,7 @@ const SELECTED_RET_FLIGHT = 'SELECTED_RET_FLIGHT';
 const FETCHING_FLIGHTS = 'FETCHING_FLIGHTS';
 const FILTEREDFLIGHTS = 'FILTEREDFLIGHTS';
 const RESET_ALL_FLIGHTS = 'RESET_ALL_FLIGHTS';
+const FETCHED_RET_FLIGHT = 'FETCHED_RET_FLIGHT';
 
 const gotDepFlights = flights => ({
   type: GOT_DEP_FLIGHTS,
@@ -67,6 +68,7 @@ export const getRetFlights = (from, to, date) => async dispatch => {
 
 const initialState = {
   isFetching: false,
+  fetchedRetFlight: false,
   depFlights: [],
   retFlights: [],
   filteredFlights: [],
@@ -85,7 +87,10 @@ const flightReducer = (state = initialState, action) => {
     case SELECTED_DEP_FLIGHT:
       return { ...state, sDepFlight: action.sDepFlight };
     case SELECTED_RET_FLIGHT:
-      return { ...state, sRetFlight: action.sRetFlight };
+      return {
+        ...state,
+        sRetFlight: action.sRetFlight
+      };
     case FILTEREDFLIGHTS:
       return { ...state, filteredFlights: action.flights };
     case RESET_ALL_FLIGHTS:

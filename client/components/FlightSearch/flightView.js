@@ -63,12 +63,7 @@ class FlightView extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  selectDepF: flight => dispatch(selectedDepFlight(flight)),
-  selectRetF: flight => dispatch(selectedRetFlight(flight))
-});
-
 export default connect(
   null,
-  mapDispatchToProps
+  null
 )(FlightView);
