@@ -53,7 +53,6 @@ class FlightResults extends React.Component {
   };
 
   render() {
-    console.log('main props here', this.props);
     const allFlights = this.state.displFlights.slice(0, 10);
     const priceSorted = _.sortBy(allFlights, [
       x => Number(x.offerItems[0].price.total)

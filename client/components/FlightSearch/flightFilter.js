@@ -3,7 +3,11 @@ import { majCities, UScities } from '../../utils';
 import DateRangePicker from 'react-daterange-picker';
 import moment from 'moment';
 import 'react-daterange-picker/dist/css/react-calendar.css';
-import { getDepFlights, getRetFlights } from '../../store/reducers/flight';
+import {
+  getDepFlights,
+  getRetFlights,
+  resetAllFlights
+} from '../../store/reducers/flight';
 import { connect } from 'react-redux';
 import FlightResults from './flightResults';
 
@@ -19,6 +23,8 @@ class FlightFilter extends React.Component {
       DestinLoc: '',
       value: moment.range(today.clone(), today.clone().add(7, 'days')),
       isOpen: false
+      /* DepFlights: [],
+      RetFlights: [] */
     };
     this.SearchFlights = this.SearchFlights.bind(this);
   }
@@ -65,6 +71,17 @@ class FlightFilter extends React.Component {
     );
   };
 
+  handleReset = () => {
+    this.props.resetFlights();
+    this.setState({
+      Departing: '',
+      Returning: '',
+      OriginLoc: '',
+      DestinLoc: '',
+      value: moment.range(today.clone(), today.clone().add(7, 'days'))
+    });
+  };
+
   async SearchFlights(evt) {
     evt.preventDefault();
     let { Returning, Departing, OriginLoc, DestinLoc } = this.state;
@@ -78,10 +95,6 @@ class FlightFilter extends React.Component {
       UScities[OriginLoc],
       Returning
     );
-    this.setState({
-      DepFlights: this.props.depFlights,
-      RetFlights: this.props.retFlights
-    });
   }
 
   render() {
@@ -134,9 +147,14 @@ class FlightFilter extends React.Component {
               singleDateRange={true}
             />
           )}
-          <button onClick={this.SearchFlights}>Find Flights</button>
+          <button type="submit" onClick={this.SearchFlights}>
+            Find Flights
+          </button>
+          <button type="reset" onClick={this.handleReset}>
+            Reset
+          </button>
         </form>
-        <FlightResults />
+        <FlightResults resDisplFl={this.resDisplFl} />
       </div>
     );
   }
@@ -144,7 +162,8 @@ class FlightFilter extends React.Component {
 
 const mapDispatchToProps = dispatch => ({
   searchDepFlights: (from, to, date) => dispatch(getDepFlights(from, to, date)),
-  searchRetFlights: (from, to, date) => dispatch(getRetFlights(from, to, date))
+  searchRetFlights: (from, to, date) => dispatch(getRetFlights(from, to, date)),
+  resetFlights: () => dispatch(resetAllFlights())
 });
 
 export default connect(

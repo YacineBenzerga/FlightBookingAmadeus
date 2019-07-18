@@ -11,7 +11,6 @@ class FlightView extends React.Component {
   }
 
   render() {
-    console.log('props here', this.props.ns);
     const flt = this.props.flt.offerItems[0];
     const fltDetail1 = flt.services[0].segments[0];
     const fltDetail2 = flt.services[0].segments[1];

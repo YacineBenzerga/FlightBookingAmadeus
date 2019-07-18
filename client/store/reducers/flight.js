@@ -6,6 +6,7 @@ const SELECTED_DEP_FLIGHT = 'SELECTED_DEP_FLIGHT';
 const SELECTED_RET_FLIGHT = 'SELECTED_RET_FLIGHT';
 const FETCHING_FLIGHTS = 'FETCHING_FLIGHTS';
 const FILTEREDFLIGHTS = 'FILTEREDFLIGHTS';
+const RESET_ALL_FLIGHTS = 'RESET_ALL_FLIGHTS';
 
 const gotDepFlights = flights => ({
   type: GOT_DEP_FLIGHTS,
@@ -15,6 +16,10 @@ const gotDepFlights = flights => ({
 const gotRetFlights = flights => ({
   type: GOT_RET_FLIGHTS,
   flights
+});
+
+export const resetAllFlights = () => ({
+  type: RESET_ALL_FLIGHTS
 });
 
 export const selectedDepFlight = flight => ({
@@ -83,6 +88,8 @@ const flightReducer = (state = initialState, action) => {
       return { ...state, sRetFlight: action.sRetFlight };
     case FILTEREDFLIGHTS:
       return { ...state, filteredFlights: action.flights };
+    case RESET_ALL_FLIGHTS:
+      return initialState;
     default:
       return state;
   }
