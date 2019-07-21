@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route, Switch } from 'react-router-dom';
 
-import { FlightFilter, HotelSearch } from './components';
+import { FlightFilter, HotelSearch, Navbar } from './components';
 
 /**
  * COMPONENT
@@ -11,7 +11,7 @@ class Routes extends Component {
   render() {
     return (
       <div>
-        <Route exact path="/" component={FlightFilter} />
+        <Route exact path="/flights" component={FlightFilter} />
         <Route exact path="/hotels" component={HotelSearch} />
       </div>
     );

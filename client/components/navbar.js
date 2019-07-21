@@ -2,31 +2,105 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { logout } from '../store';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
+import SwipeableViews from 'react-swipeable-views';
+import { FlightFilter, HotelSearch } from './index';
 
-const Navbar = () => (
-  <header>
-    <div>
+const styles = theme => ({
+  root: {
+    width: 500
+  }
+});
+
+TabContainer.propTypes = {
+  children: PropTypes.node.isRequired,
+  dir: PropTypes.string.isRequired
+};
+
+function TabContainer({ children, dir }) {
+  return (
+    <Typography component="div" dir={dir} style={{ padding: 8 * 3 }}>
+      {children}
+    </Typography>
+  );
+}
+
+class Navbar extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      value: 0
+    };
+  }
+
+  handleChangeTab = (event, value) => {
+    this.setState({ value });
+  };
+
+  handleChangeTabIndex = index => {
+    this.setState({ value: index });
+  };
+
+  render() {
+    const { value } = this.state;
+    const { theme } = this.props;
+    return (
       <div>
-        <div className="headline">
-          <h2>Travel more Plan less</h2>
+        <div className="w3-bar w3-white w3-border-bottom w3-xlarge">
+          <a
+            href="/"
+            className="w3-bar-item w3-button w3-text-red w3-hover-red"
+          >
+            <b>
+              <i className="fa fa-map-marker w3-margin-right" />
+              TravelCompanion
+            </b>
+          </a>
         </div>
-        <nav>
-          <ul className="topnav">
-            <li className="navbarLi">
-              <img src="https://img.icons8.com/nolan/64/000000/airport.png" />
-            </li>
-            <li className="navbarLi">
-              <a href="/flights">Flights</a>
-            </li>
-            <li className="navbarLi">
-              <a href="/hotels">Hotels</a>
-            </li>
-          </ul>
-        </nav>
+        <div /* className="navbar-container" */>
+          <header>
+            <div>
+              <div className="w3-display-middle" style={{ width: '75%' }}>
+                <AppBar position="static" color="default">
+                  <Tabs
+                    value={value}
+                    onChange={this.handleChangeTab}
+                    indicatorColor="primary"
+                    textColor="primary"
+                    variant="fullWidth"
+                  >
+                    <Tab label="Flights" />
+                    <Tab label="Hotels" />
+                  </Tabs>
+                </AppBar>
+                <SwipeableViews
+                  axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+                  index={this.state.value}
+                  onChangeIndex={this.handleChangeIndex}
+                >
+                  <TabContainer dir={theme.direction}>
+                    <FlightFilter />
+                  </TabContainer>
+                  <TabContainer dir={theme.direction}>
+                    <HotelSearch />
+                  </TabContainer>
+                </SwipeableViews>
+              </div>
+            </div>
+          </header>
+        </div>
       </div>
-    </div>
-  </header>
-);
+    );
+  }
+}
 
-export default Navbar;
+Navbar.propTypes = {
+  classes: PropTypes.object.isRequired,
+  theme: PropTypes.object.isRequired
+};
+
+export default withStyles(styles, { withTheme: true })(Navbar);

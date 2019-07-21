@@ -10,84 +10,66 @@ label {
   display: block;
 }
 
-nav a {
-  display: inline-block;
-  margin: 1em;
-}
-
-form div {
-  margin: 1em;
-  display: inline-block;
-}
-
-ul.topnav {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
-  width: 100%;
-  position: -webkit-sticky; /* Safari */
-  position: sticky;
-  top: 0;
-}
-
-.navbarLi {
-  float: left;
-  border-right: 1px solid #bbb;
-}
-
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-/* Change the link color to #111 (black) on hover */
-li a:hover {
-  background-color: #111;
-}
-
-/* li:last-child {
-  border-right: none;
-} */
-
 .active {
   background-color: #4caf50;
 }
 
-.header img {
-  float: left;
-  width: 100px;
-  height: 100px;
-  background: #555;
-}
-
-.header h2 {
-  position: relative;
-  top: 18px;
-  left: 10px;
-}
-
-.flightResults {
+/* .flightResults {
   display: flex;
   flex: auto;
   flex-direction: column;
   align-items: stretch;
   justify-content: space-around;
 }
-
-ol {
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  padding-inline-start: 40px;
+ */
+.navbar-container {
+  width: 50 px;
+  border: 15px;
+  margin: 20px;
+  font-family: 'Raleway', Arial, Helvetica, sans-serif;
 }
 
-ol li {
+.flightFilter {
+  margin: auto;
+}
+
+.flight-form {
   display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  font-family: 'Raleway';
+}
+
+.flight-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: baseline;
+  font-size: medium;
+}
+
+.fromToDate {
+  display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: stretch;
+}
+
+.select-flight {
+  background-color: aliceblue;
+  border: 6px solid transparent;
+  font-size: medium;
+}
+
+.select-flight-selected:after {
+  position: absolute;
+  content: '';
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
 }
