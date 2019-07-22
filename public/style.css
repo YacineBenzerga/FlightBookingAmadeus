@@ -14,23 +14,23 @@ label {
   background-color: #4caf50;
 }
 
-/* .flightResults {
+.flight-results {
   display: flex;
-  flex: auto;
   flex-direction: column;
-  align-items: stretch;
-  justify-content: space-around;
+  width: 100px;
+  height: 100px;
+  position: fixed;
+  bottom: 0px;
 }
- */
 .navbar-container {
   width: 50 px;
-  border: 15px;
-  margin: 20px;
-  font-family: 'Raleway', Arial, Helvetica, sans-serif;
 }
 
 .flightFilter {
   margin: auto;
+  position: relative;
+  margin-left: 5rem;
+  margin-right: 5rem;
 }
 
 .flight-form {
@@ -38,6 +38,7 @@ label {
   flex-direction: column;
   justify-content: space-evenly;
   font-family: 'Raleway';
+  margin-bottom: 10px;
 }
 
 .flight-buttons {
@@ -57,19 +58,51 @@ label {
   align-content: stretch;
 }
 
-.select-flight {
-  background-color: aliceblue;
+.selectFlight {
+  background-color: whitesmoke;
   border: 6px solid transparent;
+  font-size: medium;
+  box-sizing: border-box;
+  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+}
+
+.date-select {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
   font-size: medium;
 }
 
-.select-flight-selected:after {
-  position: absolute;
-  content: '';
-  top: 14px;
-  right: 10px;
-  width: 0;
-  height: 0;
-  border: 6px solid transparent;
-  border-color: #fff transparent transparent transparent;
+.flight-view {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: stretch;
+  border: 15px transparents;
+  padding: 50px;
+  margin: 20px;
+}
+
+.flt-detail1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: stretch;
+}
+
+.flt-detail2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: stretch;
+}
+.flt-detail3 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: stretch;
 }

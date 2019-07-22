@@ -89,7 +89,7 @@ const xxx = {
   ]
 };
 
-var humanizeDur = (str1, str2, type) => {
+var humanizeDur = (str1, str2) => {
   var hh1 = Number(str1.split('H')[0]);
   var mn1 = Number(str1.split('H')[1].split('M')[0]);
   var hh2 = Number(str2.split('H')[0]);
@@ -101,13 +101,12 @@ var humanizeDur = (str1, str2, type) => {
     resM = Math.floor((mn1 + mn2) % 60);
   }
   const obj = { minutes: resM, hours: hh1 + hh2 + resH };
-
   return obj;
 };
 
 var durFix = str1 => {
-  var hh1 = Number(str1.split('H')[0]);
-  var mn1 = Number(str1.split('H')[1].split('M')[0]);
+  var hh1 = Number(str1.split('h')[0]);
+  var mn1 = Number(str1.split('h')[1].split('m')[0]);
   const obj = { minutes: mn1, hours: hh1 };
   return obj;
 };
@@ -130,11 +129,11 @@ class FlightView extends React.Component {
       ? '1 stop ' + fltDetail1.flightSegment.arrival.iataCode
       : 'non stop';
 
-    const availability = fltDetail1.pricingDetailPerAdult.availability;
-    const departTime = moment(
+    var availability = fltDetail1.pricingDetailPerAdult.availability;
+    var departTime = moment(
       fltDetail1.flightSegment.departure.at /* .split('T')[1].split('-')[0] */
-    ).format('hh:mma');
-    var duration = 's';
+    );
+    var duration = '';
     if (fltDetail2) {
       const resDur = humanizeDur(
         fltDetail1.flightSegment.duration.split('T')[1],
@@ -144,12 +143,18 @@ class FlightView extends React.Component {
     } else {
       var duration = fltDetail1.flightSegment.duration.split('T')[1];
     }
-    const arrivalTime = moment(departTimes)
-      .add(duration.hours, 'hours')
-      .add(duration.minutes, 'minutes')
+
+    var objDur = null;
+    if (typeof duration === 'string') {
+      var objDur = durFix(duration);
+    } else {
+      var objDur = duration;
+    }
+
+    var arrivalTime = moment(departTime)
+      .add(objDur.hours, 'hours')
+      .add(objDur.minutes, 'minutes')
       .format('hh:mma');
-    //flight time(3:00pm - 5:54pm)   duration(5h 54m)(Nonstop)                Price($385) Button(Select)
-    //CareerLogo (Career)            EWR-SFO                                  roundtrip
 
     var totalPriceTax = new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -165,10 +170,10 @@ class FlightView extends React.Component {
     return (
       <div key={flt.id} className="flight-view">
         <div className="flt-detail1">
-          <label>{departTime}</label>
+          <label>
+            {departTime.format('hh:mma')}-{arrivalTime}
+          </label>
           <label>{duration}</label>
-          <label>{arrivalTime}</label>
-          <label />
         </div>
         <div className="flt-detail2">
           <label>

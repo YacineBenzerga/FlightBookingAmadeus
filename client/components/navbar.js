@@ -12,7 +12,8 @@ import { FlightFilter, HotelSearch } from './index';
 
 const styles = theme => ({
   root: {
-    width: 500
+    width: 800,
+    height: 1500
   }
 });
 
@@ -61,8 +62,15 @@ class Navbar extends React.Component {
             </b>
           </a>
         </div>
-        <div /* className="navbar-container" */>
+        <div className="navbar-container">
           <header>
+            {/*  <img
+              className="w3-image"
+              src="traveler.jpg"
+              alt="London"
+              width="1500"
+              height="700"
+            /> */}
             <div>
               <div className="w3-display-middle" style={{ width: '75%' }}>
                 <AppBar position="static" color="default">
