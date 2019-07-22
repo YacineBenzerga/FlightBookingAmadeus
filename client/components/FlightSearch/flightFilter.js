@@ -63,11 +63,14 @@ class FlightFilter extends React.Component {
 
   renderSelectionValue = () => {
     return (
-      <div>
-        <div>Selection</div>
-        {this.state.value.start.format('YYYY-MM-DD')}
-        {' - '}
-        {this.state.value.end.format('YYYY-MM-DD')}
+      <div className="date-select" onClick={this.onToggle}>
+        <b>
+          <i className="far fa-calendar-alt" />
+          <label>
+            Departing: {this.state.value.start.format('MM/DD/YYYY')}
+          </label>
+          <label> Returning: {this.state.value.end.format('MM/DD/YYYY')}</label>
+        </b>
       </div>
     );
   };
@@ -122,7 +125,7 @@ class FlightFilter extends React.Component {
                     name="OriginLoc"
                     onChange={this.handleChange}
                     value={this.state.OriginLoc}
-                    className="select-flight"
+                    className="selectFlight"
                   >
                     <option value="" disabled selected>
                       Flying from
@@ -140,7 +143,7 @@ class FlightFilter extends React.Component {
                     name="DestinLoc"
                     onChange={this.handleChange}
                     value={this.state.DestinLoc}
-                    className="select-flight"
+                    className="selectFlight"
                   >
                     <option value="" disabled selected>
                       Flying to
@@ -153,13 +156,7 @@ class FlightFilter extends React.Component {
                       );
                     })}
                   </select>
-                  <div>
-                    <input
-                      type="button"
-                      value="Toggle date picker"
-                      onClick={this.onToggle}
-                    />
-                  </div>
+                  <div>{this.renderSelectionValue()}</div>
                   {this.state.isOpen && (
                     <DateRangePicker
                       value={this.state.value}
@@ -170,7 +167,6 @@ class FlightFilter extends React.Component {
                   )}
                 </div>
 
-                {/* <div>{this.renderSelectionValue()}</div> */}
                 <div className="flight-buttons">
                   <p>
                     <button
