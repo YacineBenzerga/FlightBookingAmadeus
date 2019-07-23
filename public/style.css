@@ -17,6 +17,7 @@ label {
 .topnav {
   overflow: hidden;
   background-color: #333;
+  position: sticky;
 }
 .topnav a:hover {
   background-color: #ddd;
@@ -59,12 +60,29 @@ label {
   padding-left: 16px;
 }
 
+.flight-container {
+  width: 70%;
+  margin-top: 0%;
+  margin: 5%;
+  padding: 5%;
+  position: relative;
+}
+
+.form-container {
+  background-color: transparent;
+}
+
 .flight-form {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-evenly;
   font-family: 'Raleway';
   margin-bottom: 10px;
+  align-items: baseline;
+}
+
+.flight-form div {
+  margin: 1%;
 }
 
 .flight-buttons {
@@ -94,9 +112,9 @@ label {
 
 .date-select {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-evenly;
-  font-size: medium;
+  font-size: smaller;
 }
 
 .flight-view {

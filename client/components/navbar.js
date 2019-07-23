@@ -24,16 +24,11 @@ class Navbar extends React.Component {
             </b>
           </a>
         </div>
-        <div>
+        <div
+          className="w3-display-container w3-content w3-hide-small"
+          style={{ maxWidth: '1500px' }}
+        >
           <header>
-            {/* <img
-              className="w3-image"
-              src="traveler.jpg"
-              alt="London"
-              width="1500"
-              height="700"
-            />  */}
-
             <div className="topnav">
               <a className="active">
                 <Link to="/flights">Flights</Link>
@@ -42,6 +37,13 @@ class Navbar extends React.Component {
                 <Link to="/hotels">Hotels</Link>
               </a>
             </div>
+            <img
+              className="w3-image"
+              src="traveler.jpg"
+              alt="London"
+              width="1500"
+              height="700"
+            />
           </header>
         </div>
       </div>
