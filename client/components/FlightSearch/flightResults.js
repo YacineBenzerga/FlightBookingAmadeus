@@ -48,7 +48,7 @@ class FlightResults extends React.Component {
     } else if (ns === 1) {
       return <div>Select returning flight</div>;
     } else {
-      return <div>recommended destinations from New York City</div>;
+      return <div />;
     }
   };
 
@@ -68,6 +68,8 @@ class FlightResults extends React.Component {
               flt={flt}
               key={flt.id}
               handleSelect={this.handleSelect}
+              isOpen={true}
+              flType={false}
             />
           ))}
         </div>

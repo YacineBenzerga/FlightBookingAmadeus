@@ -63,11 +63,14 @@ class FlightFilter extends React.Component {
 
   renderSelectionValue = () => {
     return (
-      <div>
-        <div>Selection</div>
-        {this.state.value.start.format('YYYY-MM-DD')}
-        {' - '}
-        {this.state.value.end.format('YYYY-MM-DD')}
+      <div className="date-select" onClick={this.onToggle}>
+        <b>
+          <i className="far fa-calendar-alt" />
+          <label>
+            Departing: {this.state.value.start.format('MM/DD/YYYY')}
+          </label>
+          <label> Returning: {this.state.value.end.format('MM/DD/YYYY')}</label>
+        </b>
       </div>
     );
   };
@@ -107,67 +110,85 @@ class FlightFilter extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="flightFilter">
         {this.state.ns === 2 ? (
           <div>
             <FlightBook flRec={this.state.flRec} />
           </div>
         ) : (
-          <div>
-            <form onSubmit={this.SearchFlights}>
-              <label>From?</label>
-              <select
-                name="OriginLoc"
-                onChange={this.handleChange}
-                value={this.state.OriginLoc}
-              >
-                <option>--</option>
-                {majCities.map(stt => {
-                  return (
-                    <option key={stt} value={stt}>
-                      {stt}
+          <div id="Flight">
+            {/* <h3>Travel the world with us</h3> */}
+            <div>
+              <form className="flight-form" onSubmit={this.SearchFlights}>
+                <div className="fromToDate">
+                  <select
+                    name="OriginLoc"
+                    onChange={this.handleChange}
+                    value={this.state.OriginLoc}
+                    className="selectFlight"
+                  >
+                    <option value="" disabled selected>
+                      Flying from
                     </option>
-                  );
-                })}
-              </select>
-              <label>To?</label>
-              <select
-                name="DestinLoc"
-                onChange={this.handleChange}
-                value={this.state.DestinLoc}
-              >
-                <option>--</option>
-                {majCities.map(stt => {
-                  return (
-                    <option key={stt} value={stt}>
-                      {stt}
-                    </option>
-                  );
-                })}
-              </select>
-              <div>
-                <input
-                  type="button"
-                  value="Toggle date picker"
-                  onClick={this.onToggle}
-                />
-              </div>
+                    {majCities.map(stt => {
+                      return (
+                        <option key={stt} value={stt}>
+                          {stt}
+                        </option>
+                      );
+                    })}
+                  </select>
 
-              <div>{this.renderSelectionValue()}</div>
-              {this.state.isOpen && (
-                <DateRangePicker
-                  value={this.state.value}
-                  onSelect={this.onSelect}
-                  singleDateRange={true}
-                />
-              )}
-              <button type="submit" onClick={this.SearchFlights}>
-                Find Flights
-              </button>
-              <button type="reset" onClick={this.handleReset}>
-                Reset
-              </button>
-            </form>
+                  <select
+                    name="DestinLoc"
+                    onChange={this.handleChange}
+                    value={this.state.DestinLoc}
+                    className="selectFlight"
+                  >
+                    <option value="" disabled selected>
+                      Flying to
+                    </option>
+                    {majCities.map(stt => {
+                      return (
+                        <option key={stt} value={stt}>
+                          {stt}
+                        </option>
+                      );
+                    })}
+                  </select>
+                  <div>{this.renderSelectionValue()}</div>
+                  {this.state.isOpen && (
+                    <DateRangePicker
+                      value={this.state.value}
+                      onSelect={this.onSelect}
+                      singleDateRange={true}
+                      minimumDate={moment()}
+                    />
+                  )}
+                </div>
+
+                <div className="flight-buttons">
+                  <p>
+                    <button
+                      className="w3-button w3-pale-green"
+                      type="submit"
+                      onClick={this.SearchFlights}
+                    >
+                      Find Flights
+                    </button>
+                  </p>
+                  <p>
+                    <button
+                      className="w3-button w3-pale-red"
+                      type="reset"
+                      onClick={this.handleReset}
+                    >
+                      Reset
+                    </button>
+                  </p>
+                </div>
+              </form>
+            </div>
             <FlightResults handleGetNs={this.handleGetNs} />
           </div>
         )}
