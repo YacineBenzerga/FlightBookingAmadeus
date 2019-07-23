@@ -61,11 +61,11 @@ label {
 }
 
 .flight-container {
-  width: 70%;
   margin-top: 0%;
-  margin: 5%;
-  padding: 5%;
+  margin: 1%;
+  padding: 1%;
   position: relative;
+  background-color: whitesmoke;
 }
 
 .form-container {
@@ -78,7 +78,7 @@ label {
   justify-content: space-evenly;
   font-family: 'Raleway';
   margin-bottom: 10px;
-  align-items: baseline;
+  align-items: center;
 }
 
 .flight-form div {
@@ -103,18 +103,31 @@ label {
 }
 
 .selectFlight {
-  background-color: whitesmoke;
-  border: 6px solid transparent;
-  font-size: medium;
-  box-sizing: border-box;
-  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+  background-color: white;
+  border: none;
+  display: inline-block;
+  padding: 8px 16px;
+  vertical-align: middle;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  background-color: inherit;
+  text-align: center;
+  cursor: pointer;
+  white-space: nowrap;
 }
 
 .date-select {
   display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  font-size: smaller;
+  flex-direction: row;
+  justify-content: start;
+  font-size: medium;
+}
+
+.date-select div {
+  background-color: white;
+  align-items: center;
+  margin: 5px;
 }
 
 .flight-view {

@@ -66,11 +66,16 @@ class FlightFilter extends React.Component {
       <div className="date-select" onClick={this.onToggle}>
         <div>
           <label>
-            Departing: {this.state.value.start.format('MM/DD/YYYY')}
+            <small>Departing:</small>{' '}
+            {this.state.value.start.format('MM/DD/YYYY')}
           </label>
         </div>
         <div>
-          <label> Returning: {this.state.value.end.format('MM/DD/YYYY')}</label>
+          <label>
+            {' '}
+            <small>Returning:</small>{' '}
+            {this.state.value.end.format('MM/DD/YYYY')}
+          </label>
         </div>
       </div>
     );
@@ -130,7 +135,8 @@ class FlightFilter extends React.Component {
                     name="OriginLoc"
                     onChange={this.handleChange}
                     value={this.state.OriginLoc}
-                    className="selectFlights"
+                    className="selectFlight"
+                    style={{ backgroundColor: 'white' }}
                   >
                     <option value="" disabled selected>
                       Flying from
@@ -150,7 +156,8 @@ class FlightFilter extends React.Component {
                     name="DestinLoc"
                     onChange={this.handleChange}
                     value={this.state.DestinLoc}
-                    className="selectFlights"
+                    className="selectFlight"
+                    style={{ backgroundColor: 'white' }}
                   >
                     <option value="" disabled selected>
                       Flying to
@@ -164,7 +171,7 @@ class FlightFilter extends React.Component {
                     })}
                   </select>
                 </div>
-                <div style={{ width: '20%' }}>
+                <div style={{ width: '30%' }}>
                   <div>{this.renderSelectionValue()}</div>
                   {this.state.isOpen && (
                     <DateRangePicker
