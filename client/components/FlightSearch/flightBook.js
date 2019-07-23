@@ -1,5 +1,5 @@
 import React from 'react';
-import FltViewBook from './fltViewBook';
+import FlightView from './flightView';
 
 class FlightBook extends React.Component {
   constructor() {
@@ -8,10 +8,16 @@ class FlightBook extends React.Component {
   }
 
   render() {
+    console.log('flrec here', this.props);
     return (
       <div>
         {this.props.flRec.map(flt => (
-          <FltViewBook flt={flt} key={Math.random()} />
+          <FlightView
+            flt={flt}
+            key={Math.random()}
+            isOpen={false}
+            flType={true}
+          />
         ))}
       </div>
     );

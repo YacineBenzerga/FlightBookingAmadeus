@@ -68,6 +68,8 @@ class FlightResults extends React.Component {
               flt={flt}
               key={flt.id}
               handleSelect={this.handleSelect}
+              isOpen={true}
+              flType={false}
             />
           ))}
         </div>

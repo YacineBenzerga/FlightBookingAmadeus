@@ -41,7 +41,13 @@ class FlightView extends React.Component {
   }
 
   render() {
-    const flt = this.props.flt.offerItems[0];
+    var flt = null;
+    if (this.props.flType === true) {
+      var flt = this.props.flt;
+    } else {
+      flt = this.props.flt.offerItems[0];
+    }
+
     const fltDetail1 = flt.services[0].segments[0];
     var fltDetail2 = null;
     if (flt.services[0].segments.length > 1) {
@@ -126,15 +132,17 @@ class FlightView extends React.Component {
           <label style={{ color: 'red' }}>
             {availability} left at <b>{totalPriceTax}</b>
           </label>
-          <div style={{ margin: '10px solid transparent' }}>
-            <button
-              id={JSON.stringify(flt)}
-              onClick={this.props.handleSelect}
-              className="w3-button w3-yellow"
-            >
-              Select
-            </button>
-          </div>
+          {this.props.isOpen && (
+            <div style={{ margin: '10px solid transparent' }}>
+              <button
+                id={JSON.stringify(flt)}
+                onClick={this.props.handleSelect}
+                className="w3-button w3-yellow"
+              >
+                Select
+              </button>
+            </div>
+          )}
         </div>
       </div>
     );
