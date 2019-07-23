@@ -64,13 +64,14 @@ class FlightFilter extends React.Component {
   renderSelectionValue = () => {
     return (
       <div className="date-select" onClick={this.onToggle}>
-        <b>
-          <i className="far fa-calendar-alt" />
+        <div>
           <label>
             Departing: {this.state.value.start.format('MM/DD/YYYY')}
           </label>
+        </div>
+        <div>
           <label> Returning: {this.state.value.end.format('MM/DD/YYYY')}</label>
-        </b>
+        </div>
       </div>
     );
   };
@@ -110,22 +111,26 @@ class FlightFilter extends React.Component {
 
   render() {
     return (
-      <div className="flightFilter">
+      <div className="flight-container">
         {this.state.ns === 2 ? (
           <div>
             <FlightBook flRec={this.state.flRec} />
           </div>
         ) : (
-          <div id="Flight">
-            {/* <h3>Travel the world with us</h3> */}
-            <div>
-              <form className="flight-form" onSubmit={this.SearchFlights}>
-                <div className="fromToDate">
+          <div>
+            <h3>Travel the world with us</h3>
+            <div className="form-container">
+              <form
+                className="flight-form"
+                style={{ margin: '0 -16pxs' }}
+                onSubmit={this.SearchFlights}
+              >
+                <div style={{ width: '20%' }}>
                   <select
                     name="OriginLoc"
                     onChange={this.handleChange}
                     value={this.state.OriginLoc}
-                    className="selectFlight"
+                    className="selectFlights"
                   >
                     <option value="" disabled selected>
                       Flying from
@@ -138,12 +143,14 @@ class FlightFilter extends React.Component {
                       );
                     })}
                   </select>
+                </div>
 
+                <div style={{ width: '20%' }}>
                   <select
                     name="DestinLoc"
                     onChange={this.handleChange}
                     value={this.state.DestinLoc}
-                    className="selectFlight"
+                    className="selectFlights"
                   >
                     <option value="" disabled selected>
                       Flying to
@@ -156,6 +163,8 @@ class FlightFilter extends React.Component {
                       );
                     })}
                   </select>
+                </div>
+                <div style={{ width: '20%' }}>
                   <div>{this.renderSelectionValue()}</div>
                   {this.state.isOpen && (
                     <DateRangePicker
@@ -166,8 +175,7 @@ class FlightFilter extends React.Component {
                     />
                   )}
                 </div>
-
-                <div className="flight-buttons">
+                <div style={{ width: '20%' }}>
                   <p>
                     <button
                       className="w3-button w3-pale-green"
@@ -177,6 +185,8 @@ class FlightFilter extends React.Component {
                       Find Flights
                     </button>
                   </p>
+                </div>
+                <div style={{ width: '20%' }}>
                   <p>
                     <button
                       className="w3-button w3-pale-red"
