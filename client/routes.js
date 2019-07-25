@@ -11,6 +11,7 @@ class Routes extends Component {
   render() {
     return (
       <div>
+        <Route exact path="/" component={FlightFilter} />
         <Route exact path="/flights" component={FlightFilter} />
         <Route exact path="/hotels" component={HotelSearch} />
         <Route exact path="/flightView" component={FlightView} />
@@ -29,4 +30,4 @@ class Routes extends Component {
 );
  */
 
-export default Routes;
+export default withRouter(Routes);

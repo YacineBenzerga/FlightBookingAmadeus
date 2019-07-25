@@ -5,8 +5,10 @@ import FlightView from './flightView';
 import {
   selectedDepFlight,
   selectedRetFlight,
-  fetchingFlights
+  fetchingFlights,
+  fetchingRetFlights
 } from '../../store/reducers/flight';
+import ReactLoading from 'react-loading';
 
 class FlightResults extends React.Component {
   constructor(props) {
@@ -40,13 +42,36 @@ class FlightResults extends React.Component {
   };
 
   rendW = () => {
+    const divSt = {
+      color: '#1b398c',
+      fontSize: '25px',
+      fontWeight: 'bold'
+    };
     const { displFlights, ns } = this.state;
-    if (fetchingFlights === true) {
-      return <div>Loading</div>;
+    const isFetching = this.props.isFetching;
+
+    if (isFetching === true) {
+      return (
+        <div>
+          <label style={divSt}>Finding cheapest prices</label>
+          <ReactLoading
+            type={'bars'}
+            color={'black'}
+            height={'10px'}
+            width={'80px'}
+          />
+        </div>
+      );
     } else if (ns === 0 && displFlights.length > 0) {
-      return <div>Select departing flight</div>;
+      return (
+        <div style={divSt}>
+          Select your departure to {this.props.fltInfo.des}
+        </div>
+      );
     } else if (ns === 1) {
-      return <div>Select returning flight</div>;
+      return (
+        <div style={divSt}>Select your return to {this.props.fltInfo.dpt}</div>
+      );
     } else {
       return <div />;
     }
@@ -60,8 +85,8 @@ class FlightResults extends React.Component {
 
     return (
       <div>
-        <div className="flightResults">
-          {this.rendW()}
+        <div>
+          <div className="isFetchingFlight">{this.rendW()}</div>
           {priceSorted.map(flt => (
             <FlightView
               ns={this.state.ns}
@@ -79,7 +104,8 @@ class FlightResults extends React.Component {
 }
 const mapStateToProps = state => ({
   depFlights: state.flight.depFlights,
-  retFlights: state.flight.retFlights
+  retFlights: state.flight.retFlights,
+  isFetching: state.flight.isFetching
 });
 
 const mapDispatchToProps = dispatch => ({

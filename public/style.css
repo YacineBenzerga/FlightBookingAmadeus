@@ -17,7 +17,6 @@ label {
 .topnav {
   overflow: hidden;
   background-color: #333;
-  position: sticky;
 }
 .topnav a:hover {
   background-color: #ddd;
@@ -61,24 +60,30 @@ label {
 }
 
 .flight-container {
-  width: 70%;
   margin-top: 0%;
-  margin: 5%;
-  padding: 5%;
+  margin: 1%;
+  padding: 1%;
   position: relative;
+  background-color: whitesmoke;
 }
 
 .form-container {
   background-color: transparent;
 }
 
+.select-container {
+  /* width: 20%; */
+  background-color: white;
+  align-content: center;
+}
+
 .flight-form {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: stretch;
   font-family: 'Raleway';
   margin-bottom: 10px;
-  align-items: baseline;
+  align-items: center;
 }
 
 .flight-form div {
@@ -91,6 +96,7 @@ label {
   justify-content: space-evenly;
   align-items: baseline;
   font-size: medium;
+  background-color: white;
 }
 
 .fromToDate {
@@ -103,29 +109,57 @@ label {
 }
 
 .selectFlight {
-  background-color: whitesmoke;
-  border: 6px solid transparent;
-  font-size: medium;
-  box-sizing: border-box;
-  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+  border: none;
+  display: inline-block;
+  padding: 8px 16px;
+  vertical-align: middle;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  background-color: inherit;
+  text-align: center;
+  cursor: pointer;
+  white-space: nowrap;
 }
 
 .date-select {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: start;
+  font-size: medium;
+  margin-left: 15%;
+}
+
+.date-select div {
+  background-color: white;
+  align-items: center;
+  margin: 5px;
+  width: 45%;
+}
+
+.date-select div div {
+  display: flex;
   justify-content: space-evenly;
-  font-size: smaller;
+}
+
+.date-select label {
+  width: 30%;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  align-content: stretch;
 }
 
 .flight-view {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
-  align-content: stretch;
-  border: 15px transparents;
+  /* align-content: stretch; */
+  border: 15px transparent;
   padding: 50px;
   margin: 20px;
+  background-color: white;
 }
 
 .flt-detail1 {
@@ -154,13 +188,31 @@ label {
 .selected-flights {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: flex-end;
   align-items: center;
   align-content: stretch;
+  flex-wrap: wrap;
 }
 
 .main-review-trip {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-around;
+}
+
+.important-info-flight {
+  width: 30%;
+}
+
+i {
+  margin: auto;
+}
+
+.isFetchingFlight {
+  display: flex;
+  align-self: flex-start;
+  justify-self: auto;
+  margin: 2%;
+  padding: 5%;
+  border: 5px transparent;
 }

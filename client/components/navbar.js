@@ -12,7 +12,7 @@ class Navbar extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="headNav">
         <div className="w3-bar w3-white w3-border-bottom w3-xlarge">
           <a
             href="/flights"
@@ -37,13 +37,13 @@ class Navbar extends React.Component {
                 <Link to="/hotels">Hotels</Link>
               </a>
             </div>
-            <img
+            {/*       <img
               className="w3-image"
               src="traveler.jpg"
               alt="London"
               width="1500"
               height="700"
-            />
+            /> */}
           </header>
         </div>
       </div>
