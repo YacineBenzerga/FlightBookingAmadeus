@@ -129,7 +129,7 @@ class FlightView extends React.Component {
           <label />
         </div>
         <div className="flt-detail3">
-          <label style={{ color: 'red' }}>
+          <label style={{ color: 'red', margin: '3px' }}>
             {availability} left at <b>{totalPriceTax}</b>
           </label>
           {this.props.isOpen && (

@@ -57,7 +57,8 @@ class FlightFilter extends React.Component {
       value,
       Departing: moment(value.start).format('YYYY-MM-DD'),
       Returning: moment(value.end).format('YYYY-MM-DD'),
-      states
+      states,
+      isOpen: !this.state.isOpen
     });
   };
 
@@ -65,15 +66,16 @@ class FlightFilter extends React.Component {
     return (
       <div className="date-select" onClick={this.onToggle}>
         <div>
+          <small>Departing:</small>
           <label>
-            <small>Departing:</small>{' '}
+            <i className="fas fa-calendar-alt" />
             {this.state.value.start.format('MM/DD/YYYY')}
           </label>
         </div>
         <div>
+          <small>Returning:</small>
           <label>
-            {' '}
-            <small>Returning:</small>{' '}
+            <i className="fas fa-calendar-alt" />
             {this.state.value.end.format('MM/DD/YYYY')}
           </label>
         </div>
@@ -82,13 +84,14 @@ class FlightFilter extends React.Component {
   };
 
   handleReset = () => {
+    this.onToggle();
     this.props.resetFlights();
     this.setState({
       Departing: '',
       Returning: '',
       OriginLoc: '',
       DestinLoc: '',
-      value: moment.range(today.clone(), today.clone().add(7, 'days'))
+      value: moment.range(moment(), moment().add(7, 'days'))
     });
   };
 
@@ -115,6 +118,7 @@ class FlightFilter extends React.Component {
   };
 
   render() {
+    const { OriginLoc, DestinLoc, Departing, Returning } = this.state;
     return (
       <div className="flight-container">
         {this.state.ns === 2 ? (
@@ -130,13 +134,13 @@ class FlightFilter extends React.Component {
                 style={{ margin: '0 -16pxs' }}
                 onSubmit={this.SearchFlights}
               >
-                <div style={{ width: '20%' }}>
+                <div className="select-container">
+                  <i className="fas fa-map-marker-alt" />
                   <select
                     name="OriginLoc"
                     onChange={this.handleChange}
                     value={this.state.OriginLoc}
                     className="selectFlight"
-                    style={{ backgroundColor: 'white' }}
                   >
                     <option value="" disabled selected>
                       Flying from
@@ -151,13 +155,14 @@ class FlightFilter extends React.Component {
                   </select>
                 </div>
 
-                <div style={{ width: '20%' }}>
+                <div className="select-container">
+                  <i className="fas fa-map-marker-alt" />
                   <select
                     name="DestinLoc"
                     onChange={this.handleChange}
                     value={this.state.DestinLoc}
                     className="selectFlight"
-                    style={{ backgroundColor: 'white' }}
+                    disabled={!OriginLoc}
                   >
                     <option value="" disabled selected>
                       Flying to
@@ -182,21 +187,30 @@ class FlightFilter extends React.Component {
                     />
                   )}
                 </div>
-                <div style={{ width: '20%' }}>
-                  <p>
+                <div
+                /* style={{
+                    width: '15%'
+                  }} */
+                >
+                  <p style={{ backgroundColor: 'white' }}>
+                    <i className="fas fa-search" />
                     <button
-                      className="w3-button w3-pale-green"
+                      className="w3-button w3-white"
                       type="submit"
                       onClick={this.SearchFlights}
+                      disabled={
+                        !(Departing && Returning && OriginLoc && DestinLoc)
+                      }
                     >
                       Find Flights
                     </button>
                   </p>
                 </div>
-                <div style={{ width: '20%' }}>
-                  <p>
+                <div>
+                  <p style={{ backgroundColor: 'white' }}>
+                    <i className="fas fa-trash-alt" />
                     <button
-                      className="w3-button w3-pale-red"
+                      className="w3-button w3-white"
                       type="reset"
                       onClick={this.handleReset}
                     >
