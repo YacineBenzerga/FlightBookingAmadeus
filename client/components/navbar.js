@@ -12,7 +12,7 @@ class Navbar extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="headNav">
         <div className="w3-bar w3-white w3-border-bottom w3-xlarge">
           <a
             href="/flights"

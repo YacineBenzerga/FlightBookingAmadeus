@@ -8,10 +8,29 @@ class FlightBook extends React.Component {
   }
 
   render() {
+    var [flt1, flt2] = [...this.props.flRec];
+
+    var ttP =
+      Number(flt1.price.total) +
+      Number(flt1.price.totalTaxes) +
+      Number(flt2.price.total) +
+      Number(flt2.price.totalTaxes);
+
+    var ttPrice = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD'
+    }).format(ttP);
     return (
       <div className="main-review-trip">
         <div>
-          <label>Review your trip</label>
+          <label
+            style={{
+              color: '#1b398c',
+              fontSize: 'medium'
+            }}
+          >
+            <b>Review your trip</b>
+          </label>
           <div className="selected-flights">
             {this.props.flRec.map(flt => (
               <FlightView
@@ -23,10 +42,17 @@ class FlightBook extends React.Component {
             ))}
           </div>
         </div>
-        <div>
-          <label>Trip summary</label>
-          <label>
-            Trip total: <b>$2840</b>
+        <div className="important-info-flight">
+          <label
+            style={{
+              fontSize: '25px',
+              color: 'black'
+            }}
+          >
+            Trip summary
+          </label>
+          <label fontSize="15px">
+            Trip total: <b>{ttPrice}</b>
           </label>
           <label
             style={{
@@ -34,8 +60,8 @@ class FlightBook extends React.Component {
             }}
           >
             Only 3 tickets left at this price!
-            <small>Rates are quoted in US dollars</small>
           </label>
+          <small>Rates are quoted in US dollars</small>
           <div>
             <b>Important Flight Information</b>
             <p>

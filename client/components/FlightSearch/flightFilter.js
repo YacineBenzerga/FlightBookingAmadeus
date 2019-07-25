@@ -25,7 +25,8 @@ class FlightFilter extends React.Component {
       value: moment.range(today.clone(), today.clone().add(7, 'days')),
       isOpen: false,
       ns: 0,
-      flRec: []
+      flRec: [],
+      clicked: false
     };
     this.SearchFlights = this.SearchFlights.bind(this);
   }
@@ -97,6 +98,9 @@ class FlightFilter extends React.Component {
 
   async SearchFlights(evt) {
     evt.preventDefault();
+    this.setState({
+      clicked: true
+    });
     let { Returning, Departing, OriginLoc, DestinLoc } = this.state;
     var depFl = await this.props.searchDepFlights(
       UScities[OriginLoc],
@@ -126,7 +130,11 @@ class FlightFilter extends React.Component {
             <FlightBook flRec={this.state.flRec} />
           </div>
         ) : (
-          <div>
+          <div
+            style={{
+              height: 'auto'
+            }}
+          >
             <h3>Travel the world with us</h3>
             <div className="form-container">
               <form
@@ -187,11 +195,7 @@ class FlightFilter extends React.Component {
                     />
                   )}
                 </div>
-                <div
-                /* style={{
-                    width: '15%'
-                  }} */
-                >
+                <div>
                   <p style={{ backgroundColor: 'white' }}>
                     <i className="fas fa-search" />
                     <button
@@ -220,7 +224,10 @@ class FlightFilter extends React.Component {
                 </div>
               </form>
             </div>
-            <FlightResults handleGetNs={this.handleGetNs} />
+            <FlightResults
+              handleGetNs={this.handleGetNs}
+              fltInfo={{ dpt: OriginLoc, des: DestinLoc }}
+            />
           </div>
         )}
       </div>

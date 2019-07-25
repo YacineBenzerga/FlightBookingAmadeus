@@ -112,9 +112,8 @@ class FlightView extends React.Component {
           <label>{carrier}</label>
         </div>
         <div className="flt-detail2">
-          <label>
-            {duration} ({nstop})
-          </label>
+          <label>{duration}</label>
+          <label>({nstop})</label>
           {fltDetail2 ? (
             <label>
               {departLoc} -> {fltDetail1.flightSegment.arrival.iataCode} ->{' '}
