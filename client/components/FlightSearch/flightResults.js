@@ -55,7 +55,7 @@ class FlightResults extends React.Component {
           <div className="loading">
             <ReactLoading
               type={'bars'}
-              color={'black'}
+              color={'#1b398c'}
               height={'10px'}
               width={'80px'}
             />

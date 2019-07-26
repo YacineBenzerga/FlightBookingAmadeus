@@ -243,6 +243,15 @@ i {
   border: 5px transparent;
 }
 
+.isFetchingHotel {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 2%;
+  padding: 2%;
+  border: 2px transparent;
+}
+
 .loading {
   display: flex;
   justify-content: center;

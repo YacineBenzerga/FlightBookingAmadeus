@@ -93,6 +93,7 @@ class HotelSearch extends React.Component {
     console.log(this.state);
     return (
       <div className="flight-container">
+        <h3>Hotels with personality</h3>
         <div className="form-container">
           <form
             className="flight-hotel-form"

@@ -141,7 +141,16 @@ const xxx = {
 class HotelView extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      added: false
+    };
   }
+
+  handleSelect = evt => {
+    this.setState({
+      added: !this.state.added
+    });
+  };
 
   render() {
     /*   const htl = xxx;
@@ -189,13 +198,11 @@ class HotelView extends React.Component {
           <small>per night</small>
         </div>
         <div style={{ margin: '10px solid transparent' }}>
-          <button
-            /*  onClick={this.props.handleSelect} */
-            className="w3-button w3-yellow"
-          >
+          <button onClick={this.handleSelect} className="w3-button w3-yellow">
             Select
           </button>
         </div>
+        {this.state.added && <small color="red">added to cart!!</small>}
         {/* <div>{htlOffers.room.typeEstimated.category}</div>
         <div>{htlOffers.room.typeEstimated.bedType}</div> */}
       </div>

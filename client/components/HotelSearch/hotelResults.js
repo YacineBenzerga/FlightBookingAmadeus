@@ -9,7 +9,6 @@ import ReactLoading from 'react-loading';
 class HotelResults extends React.Component {
   constructor() {
     super();
-    this.state = {};
   }
 
   render() {
@@ -18,17 +17,25 @@ class HotelResults extends React.Component {
       x => Number(x.offers[0].price.total)
     ]);
 
+    const divSt = {
+      color: '#1b398c',
+      fontSize: '25px',
+      fontWeight: 'bold'
+    };
     return (
       <div>
         {isFetching ? (
-          <div className="isFetchingFlight">
-            <div className="loading">
-              <ReactLoading
-                type={'bars'}
-                color={'black'}
-                height={'10px'}
-                width={'80px'}
-              />
+          <div>
+            <div className="isFetchingHotel">
+              {/* <label style={divSt}>Finding best deals</label> */}
+              <div className="loading">
+                <ReactLoading
+                  type={'bars'}
+                  color={'#1b398c'}
+                  height={'10px'}
+                  width={'80px'}
+                />
+              </div>
             </div>
           </div>
         ) : (
