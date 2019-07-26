@@ -17,6 +17,7 @@ class HotelSearch extends React.Component {
       value: moment.range(moment(), moment().add(7, 'days')),
       isOpen: false
     };
+    this.SearchHotels = this.SearchHotels.bind(this);
   }
 
   onToggle = () => {
@@ -53,9 +54,8 @@ class HotelSearch extends React.Component {
 
   async SearchHotels(evt) {
     evt.preventDefault();
-    let { city } = this.state;
-    var hotList = await this.props.searchHotels(UScities[city]);
-    this.setState({});
+    let city = this.state.DestinLoc;
+    var hotelList = await this.props.searchHotels(UScities[city]);
   }
 
   renderSelectionValue = () => {
@@ -89,20 +89,21 @@ class HotelSearch extends React.Component {
 
   render() {
     const { DestinLoc, Departing, Returning } = this.state;
+    console.log(this.state);
     return (
       <div className="flight-container">
         <div className="form-container">
           <form
             className="flight-hotel-form"
             style={{ margin: '0 -16pxs' }}
-            onSubmit={this.SearchHotels}
+            onSubmit={this.searchHotels}
           >
             <div className="select-container">
               <i className="fas fa-map-marker-alt" />
               <select
                 name="DestinLoc"
                 onChange={this.handleChange}
-                value={this.state.DestinLoc}
+                value={DestinLoc}
                 className="selectFlight"
               >
                 <option value="" disabled selected>
