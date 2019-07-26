@@ -23,14 +23,21 @@ class FlightBook extends React.Component {
     return (
       <div className="main-review-trip">
         <div>
-          <label
+          <div
             style={{
-              color: '#1b398c',
-              fontSize: 'medium'
+              margin: '5%'
             }}
           >
-            <b>Review your trip</b>
-          </label>
+            <label
+              style={{
+                color: '#1b398c',
+                fontSize: '25px',
+                fontWeight: 'bold'
+              }}
+            >
+              <b>Review your trip</b>
+            </label>
+          </div>
           <div className="selected-flights">
             {this.props.flRec.map(flt => (
               <FlightView
@@ -46,7 +53,8 @@ class FlightBook extends React.Component {
           <label
             style={{
               fontSize: '25px',
-              color: 'black'
+              color: 'black',
+              marginBottom: '10%'
             }}
           >
             Trip summary

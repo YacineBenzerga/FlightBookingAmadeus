@@ -54,12 +54,14 @@ class FlightResults extends React.Component {
       return (
         <div>
           <label style={divSt}>Finding cheapest prices</label>
-          <ReactLoading
-            type={'bars'}
-            color={'black'}
-            height={'10px'}
-            width={'80px'}
-          />
+          <div className="loading">
+            <ReactLoading
+              type={'bars'}
+              color={'black'}
+              height={'10px'}
+              width={'80px'}
+            />
+          </div>
         </div>
       );
     } else if (ns === 0 && displFlights.length > 0) {
