@@ -4,9 +4,7 @@ import _ from 'lodash';
 import FlightView from './flightView';
 import {
   selectedDepFlight,
-  selectedRetFlight,
-  fetchingFlights,
-  fetchingRetFlights
+  selectedRetFlight
 } from '../../store/reducers/flight';
 import ReactLoading from 'react-loading';
 
@@ -54,12 +52,14 @@ class FlightResults extends React.Component {
       return (
         <div>
           <label style={divSt}>Finding cheapest prices</label>
-          <ReactLoading
-            type={'bars'}
-            color={'black'}
-            height={'10px'}
-            width={'80px'}
-          />
+          <div className="loading">
+            <ReactLoading
+              type={'bars'}
+              color={'#1b398c'}
+              height={'10px'}
+              width={'80px'}
+            />
+          </div>
         </div>
       );
     } else if (ns === 0 && displFlights.length > 0) {

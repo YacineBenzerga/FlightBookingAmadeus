@@ -61,7 +61,9 @@ label {
 
 .flight-container {
   margin-top: 0%;
-  margin: 1%;
+  margin-top: 5%;
+  margin-left: 10%;
+  margin-right: 10%;
   padding: 1%;
   position: relative;
   background-color: whitesmoke;
@@ -84,6 +86,20 @@ label {
   font-family: 'Raleway';
   margin-bottom: 10px;
   align-items: center;
+}
+
+.flight-hotel-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-family: 'Raleway';
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.htl-detail1 {
+  display: flex;
+  flex-direction: column;
 }
 
 .flight-form div {
@@ -130,6 +146,13 @@ label {
   margin-left: 15%;
 }
 
+.date-select-hotel {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  font-size: medium;
+}
+
 .date-select div {
   background-color: white;
   align-items: center;
@@ -155,7 +178,7 @@ label {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  /* align-content: stretch; */
+  align-content: stretch;
   border: 15px transparent;
   padding: 50px;
   margin: 20px;
@@ -168,6 +191,7 @@ label {
   justify-content: space-evenly;
   align-items: center;
   align-content: stretch;
+  flex-grow: 1;
 }
 
 .flt-detail2 {
@@ -176,6 +200,7 @@ label {
   justify-content: space-evenly;
   align-items: center;
   align-content: stretch;
+  flex-grow: 1;
 }
 .flt-detail3 {
   display: flex;
@@ -183,6 +208,7 @@ label {
   justify-content: space-evenly;
   align-items: center;
   align-content: stretch;
+  flex-grow: 1;
 }
 
 .selected-flights {
@@ -210,9 +236,26 @@ i {
 
 .isFetchingFlight {
   display: flex;
-  align-self: flex-start;
-  justify-self: auto;
+  justify-content: center;
+  align-content: center;
   margin: 2%;
   padding: 5%;
   border: 5px transparent;
+}
+
+.isFetchingHotel {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 2%;
+  padding: 2%;
+  border: 2px transparent;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 2%;
+  padding: 3%;
 }

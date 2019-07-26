@@ -30,10 +30,10 @@ class Navbar extends React.Component {
         >
           <header>
             <div className="topnav">
-              <a className="active">
+              <a /* className="active" */>
                 <Link to="/flights">Flights</Link>
               </a>
-              <a>
+              <a /* className="active" */>
                 <Link to="/hotels">Hotels</Link>
               </a>
             </div>
