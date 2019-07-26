@@ -4,9 +4,7 @@ import _ from 'lodash';
 import FlightView from './flightView';
 import {
   selectedDepFlight,
-  selectedRetFlight,
-  fetchingFlights,
-  fetchingRetFlights
+  selectedRetFlight
 } from '../../store/reducers/flight';
 import ReactLoading from 'react-loading';
 

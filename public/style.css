@@ -97,6 +97,11 @@ label {
   align-items: center;
 }
 
+.htl-detail1 {
+  display: flex;
+  flex-direction: column;
+}
+
 .flight-form div {
   margin: 1%;
 }

@@ -6,6 +6,7 @@ import { getHotels, selectedHotels } from '../../store/reducers/hotel';
 import DateRangePicker from 'react-daterange-picker';
 import 'react-daterange-picker/dist/css/react-calendar.css';
 import moment from 'moment';
+import HotelResults from './hotelResults';
 
 class HotelSearch extends React.Component {
   constructor() {
@@ -66,7 +67,7 @@ class HotelSearch extends React.Component {
             margin: '5%'
           }}
         >
-          <small>Departing:</small>
+          <small>Check-in:</small>
           <label>
             <i className="fas fa-calendar-alt" />
             {this.state.value.start.format('MM/DD/YYYY')}
@@ -77,7 +78,7 @@ class HotelSearch extends React.Component {
             margin: '5%'
           }}
         >
-          <small>Returning:</small>
+          <small>Check-out:</small>
           <label>
             <i className="fas fa-calendar-alt" />
             {this.state.value.end.format('MM/DD/YYYY')}
@@ -146,20 +147,21 @@ class HotelSearch extends React.Component {
             </div>
           </form>
         </div>
+        <HotelResults />
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({
+/* const mapStateToProps = state => ({
   hotels: state.hotel.allHotels
-});
+}); */
 
 const mapDispatchToProps = dispatch => ({
   searchHotels: city => dispatch(getHotels(city))
 });
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(HotelSearch);
