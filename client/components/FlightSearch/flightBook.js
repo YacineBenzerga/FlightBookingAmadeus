@@ -54,14 +54,14 @@ class FlightBook extends React.Component {
           <label fontSize="15px">
             Trip total: <b>{ttPrice}</b>
           </label>
-          <label
+
+          <small
             style={{
               color: 'red'
             }}
           >
-            Only 3 tickets left at this price!
-          </label>
-          <small>Rates are quoted in US dollars</small>
+            Rates are quoted in US dollars
+          </small>
           <div>
             <b>Important Flight Information</b>
             <p>
@@ -96,7 +96,7 @@ class FlightBook extends React.Component {
             <label>Return</label>
             <ol>
               <li>
-                <b>Tickets are refundable</b>. A fee of ¥6,000 per ticket is
+                <b>Tickets are refundable</b>. A fee of $450 per ticket is
                 charged for itinerary cancellations.
               </li>
               <li>

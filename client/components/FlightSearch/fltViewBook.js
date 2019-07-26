@@ -1,7 +1,6 @@
 import React from 'react';
 
 const FltViewBook = props => {
-  console.log(props);
   const flt = props.flt;
   const fltDetail1 = flt.services[0].segments[0];
   const fltDetail2 = flt.services[0].segments[1];
