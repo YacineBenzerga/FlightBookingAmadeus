@@ -22,7 +22,7 @@ class FlightFilter extends React.Component {
       Returning: '',
       OriginLoc: '',
       DestinLoc: '',
-      value: moment.range(today.clone(), today.clone().add(7, 'days')),
+      value: moment.range(moment(), moment().add(7, 'days')),
       isOpen: false,
       ns: 0,
       flRec: [],

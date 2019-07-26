@@ -88,6 +88,15 @@ label {
   align-items: center;
 }
 
+.flight-hotel-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-family: 'Raleway';
+  margin-bottom: 10px;
+  align-items: center;
+}
+
 .flight-form div {
   margin: 1%;
 }
@@ -130,6 +139,13 @@ label {
   justify-content: start;
   font-size: medium;
   margin-left: 15%;
+}
+
+.date-select-hotel {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  font-size: medium;
 }
 
 .date-select div {
